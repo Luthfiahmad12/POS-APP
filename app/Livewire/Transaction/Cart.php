@@ -4,6 +4,7 @@ namespace App\Livewire\Transaction;
 
 use App\Models\Product;
 use App\Models\Transaction;
+use App\Services\TransactionService;
 use App\Traits\DispatchNotificationTrait;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -14,6 +15,7 @@ class Cart extends Component
 
     public $cart = [];
     public $cartTotal = 0;
+
 
     public function mount()
     {
@@ -98,12 +100,9 @@ class Cart extends Component
         $this->infoNotify('Info', 'Cart Item Deleted');
     }
 
-    public function createTransaction()
+    public function createTransaction(TransactionService $transactionService)
     {
-        $transaction = new Transaction();
-        $transaction->invoice_number = 'INV-' . rand(00000, 99999);
-        $transaction->total_price = $this->cartTotal;
-        $transaction->save();
+        $transaction = $transactionService->create($this->cartTotal);
 
         foreach ($this->cart as $item) {
             $transaction->items()->create([

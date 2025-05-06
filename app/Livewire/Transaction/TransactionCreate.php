@@ -3,6 +3,7 @@
 namespace App\Livewire\Transaction;
 
 use App\Models\Product;
+use App\Services\TransactionService;
 use App\Traits\DispatchNotificationTrait;
 use Livewire\Attributes\On;
 use Livewire\Component;

@@ -53,6 +53,5 @@
         </div>
     </div>
 
-    {{-- @include('livewire.transaction.cart') --}}
     <livewire:transaction.cart />
 </div>
