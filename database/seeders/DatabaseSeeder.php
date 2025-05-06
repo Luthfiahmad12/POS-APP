@@ -23,5 +23,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ProductSeeder::class
         ]);
+
+        User::create([
+            'name' => 'admin',
+            'email' => 'admin@mail.com',
+            'password' => 'password'
+        ]);
     }
 }

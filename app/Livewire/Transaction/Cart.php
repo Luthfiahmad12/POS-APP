@@ -113,7 +113,7 @@ class Cart extends Component
         session()->forget('cart');
         $this->reset();
 
-        return $this->redirect(route('transactions.index'), navigate: true);
+        return $this->redirect(route('transactions.detail', $transaction), navigate: true);
     }
 
     public function render()

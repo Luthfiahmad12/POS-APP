@@ -16,6 +16,10 @@ class Transaction extends Model
         'invoice_number',
         'transaction_date',
         'total_price',
+        'customer_name',
+        'payment_method',
+        'table_number',
+        'payment_status'
     ];
 
     public function casts()

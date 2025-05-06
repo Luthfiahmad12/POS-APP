@@ -3,6 +3,7 @@
 use App\Livewire\Product\ProductIndex;
 use App\Livewire\Transaction;
 use App\Livewire\Transaction\TransactionCreate;
+use App\Livewire\Transaction\TransactionDetail;
 use App\Livewire\Transaction\TransactionIndex;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -26,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('transactions', TransactionIndex::class)->name('transactions.index');
     Route::get('transactions/create', TransactionCreate::class)->name('transactions.create');
+    Route::get('transactions/{transaction}/detail', TransactionDetail::class)->name('transactions.detail');
 });
 
 require __DIR__ . '/auth.php';

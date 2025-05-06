@@ -27,8 +27,11 @@
                                 <td class="p-4">{{ 'IDR. ' . number_format($item->total_price) }}</td>
                                 <td class="p-4">{{ $item->transaction_date }}</td>
                                 <td class="p-4 flex gap-2">
-                                    <flux:button>Detail</flux:button>
-                                    <flux:button variant="danger" wire:click="destroy('{{ $item->id }}')">Delete
+                                    <flux:button href="{{ route('transactions.detail', $item) }}" wire:navigate>
+                                        Detail
+                                    </flux:button>
+                                    <flux:button variant="danger" wire:click="destroy('{{ $item->id }}')">
+                                        Delete
                                     </flux:button>
                                 </td>
                             </tr>
