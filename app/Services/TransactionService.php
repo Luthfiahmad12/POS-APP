@@ -10,6 +10,7 @@ class TransactionService
     {
         return Transaction::latest()->get();
     }
+
     public function create($cartTotal)
     {
         $data = [

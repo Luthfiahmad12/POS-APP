@@ -3,7 +3,7 @@
         <div>
             <flux:heading size="xl" class="font-bold">Shopping Cart</flux:heading>
         </div>
-        @foreach ($cart as $item)
+        @forelse ($cart as $item)
             <div
                 class="flex gap-4 border border-outline bg-surface-alt p-3 text-on-surface dark:border-outline-dark dark:bg-surface-dark-alt dark:text-on-surface-dark px-4 py-6 rounded-md shadow border">
                 <div class="flex gap-6 sm:gap-4 max-sm:flex-col">
@@ -51,7 +51,13 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <div class="min-h-[70vh] flex justify-center items-center">
+                <flux:heading size="lg">
+                    Cart is Empty
+                </flux:heading>
+            </div>
+        @endforelse
         @if (count($cart) !== 0)
             <flux:separator />
             <flux:heading size="xl" class="flex flex-wrap">Total

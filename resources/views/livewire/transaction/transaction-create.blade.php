@@ -3,7 +3,7 @@
         <flux:heading size="xl" level="1">Create Transaction</flux:heading>
         <div class="flex gap-2">
             <flux:button href="{{ route('transactions.index') }}" variant="danger" wire:navigate>
-                Cancel
+                Back
             </flux:button>
             <flux:modal.trigger name="view-cart">
                 <flux:tooltip content="View Cart">
