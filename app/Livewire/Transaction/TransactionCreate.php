@@ -3,11 +3,14 @@
 namespace App\Livewire\Transaction;
 
 use App\Models\Product;
+use App\Traits\DispatchNotificationTrait;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
+
 class TransactionCreate extends Component
 {
+    use DispatchNotificationTrait;
 
     public $cartCount = 0;
 
@@ -35,6 +38,7 @@ class TransactionCreate extends Component
         if ($index !== false) {
             $cart[$index]['qty'] += 1;
             $cart[$index]['subtotal'] = $cart[$index]['price'] * $cart[$index]['qty']; // Update subtotal
+            $this->infoNotify('Info', 'Product Is Already In Cart');
         } else {
             $cart[] = [
                 'id' => $product->id,
@@ -45,6 +49,7 @@ class TransactionCreate extends Component
             ];
 
             $this->cartCount++;
+            $this->successNotify('Success', 'Product Added');
         }
 
         session()->put('cart', $cart);

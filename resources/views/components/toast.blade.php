@@ -32,15 +32,17 @@
         }, 400);
     },
 }"
-    x-on:notify.window="addNotification({
-            variant: $event.detail.variant,
-            sender: $event.detail.sender,
-            title: $event.detail.title,
-            message: $event.detail.message,
+    x-on:notify.window="
+    console.log('Event received:', $event.detail[0]);
+    addNotification({
+            variant: $event.detail[0].variant,
+            sender: $event.detail[0].sender,
+            title: $event.detail[0].title,
+            message: $event.detail[0].message,
         })">
 
     <div x-on:mouseenter="$dispatch('pause-auto-dismiss')" x-on:mouseleave="$dispatch('resume-auto-dismiss')"
-        class="group pointer-events-none fixed inset-x-8 top-0 z-99 flex max-w-full flex-col gap-2 bg-transparent px-6 py-6 md:bottom-0 md:left-[unset] md:right-0 md:top-[unset] md:max-w-sm">
+        class="group pointer-events-none fixed bottom-0 left-0 z-[9999] flex flex-col gap-2 bg-transparent p-4 md:p-6 max-w-xs md:max-w-sm">
         <template x-for="(notification, index) in notifications" x-bind:key="notification.id">
             <!-- root div holds all of the notifications  -->
             <div>

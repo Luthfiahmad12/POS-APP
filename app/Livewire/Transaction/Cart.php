@@ -4,11 +4,14 @@ namespace App\Livewire\Transaction;
 
 use App\Models\Product;
 use App\Models\Transaction;
+use App\Traits\DispatchNotificationTrait;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Cart extends Component
 {
+    use DispatchNotificationTrait;
+
     public $cart = [];
     public $cartTotal = 0;
 
@@ -45,8 +48,7 @@ class Cart extends Component
 
             $this->cartTotal = $this->calculateCartTotal();
             $this->dispatch('item-removed');
-        } else {
-            echo 'error';
+            $this->warningNotify('Warning', 'Product Removed');
         }
     }
 
@@ -64,6 +66,8 @@ class Cart extends Component
         session()->put('cart', $this->cart);
 
         $this->cartTotal =  $this->calculateCartTotal();
+
+        $this->infoNotify('Info', 'Product Incremented');
     }
 
     public function decrementQty(string $id)
@@ -80,6 +84,8 @@ class Cart extends Component
         session()->put('cart', $this->cart);
 
         $this->cartTotal =  $this->calculateCartTotal();
+
+        $this->infoNotify('Info', 'Product Decremented');
     }
 
     public function bulkDelete()
@@ -88,6 +94,8 @@ class Cart extends Component
         $this->cart = [];
         $this->cartTotal = 0;
         $this->dispatch('cart-cleared');
+
+        $this->infoNotify('Info', 'Cart Item Deleted');
     }
 
     public function createTransaction()
@@ -113,6 +121,7 @@ class Cart extends Component
         session()->forget('cart');
         $this->reset();
 
+        $this->successNotify('Success', 'Transaction Created');
         return $this->redirect(route('transactions.detail', $transaction), navigate: true);
     }
 
