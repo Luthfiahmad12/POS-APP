@@ -1,6 +1,11 @@
 <div>
-    <flux:heading size="xl" level="1" class="mb-6">Product List</flux:heading>
-    <flux:separator variant="subtle" />
+    <div class="flex flex-col lg:flex-row justify-between lg:items-center">
+        <flux:heading size="xl" level="1">Product List</flux:heading>
+        <flux:button href="{{ route('products.create') }}" variant="primary" wire:navigate>
+            Create New Product
+        </flux:button>
+    </div>
+    <flux:separator variant="subtle" class="my-6" />
 
     <div id="table">
         <div
@@ -14,6 +19,7 @@
                         <th scope="col" class="p-4">price</th>
                         <th scope="col" class="p-4">stock</th>
                         <th scope="col" class="p-4">description</th>
+                        <th scope="col" class="p-4">action</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-outline dark:divide-outline-dark">
@@ -21,9 +27,17 @@
                         <tr>
                             <td class="p-4">{{ $item->sku }}</td>
                             <td class="p-4">{{ $item->name }}</td>
-                            <td class="p-4">{{ $item->price }}</td>
+                            <td class="p-4">{{ 'IDR. ' . number_format($item->price) }}</td>
                             <td class="p-4">{{ $item->stock }}</td>
                             <td class="p-4">{{ Str::limit($item->description, 50) }}</td>
+                            <td class="p-4 flex gap-2">
+                                <flux:button href="{{ route('products.edit', $item) }}" wire:navigate>
+                                    Edit
+                                </flux:button>
+                                <flux:button variant="danger" wire:click="destroy('{{ $item->id }}')">
+                                    Delete
+                                </flux:button>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

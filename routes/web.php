@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\Product\ProductCreate;
+use App\Livewire\Product\ProductEdit;
 use App\Livewire\Product\ProductIndex;
 use App\Livewire\Transaction;
 use App\Livewire\Transaction\TransactionCreate;
@@ -23,6 +25,8 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
     Route::get('products', ProductIndex::class)->name('products.index');
+    Route::get('products/create', ProductCreate::class)->name('products.create');
+    Route::get('products/{product}/edit', ProductEdit::class)->name('products.edit');
 
     Route::get('transactions', TransactionIndex::class)->name('transactions.index');
     Route::get('transactions/create', TransactionCreate::class)->name('transactions.create');
